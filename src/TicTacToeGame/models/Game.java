@@ -37,6 +37,37 @@ public class Game {
         board.printBoard();
     }
 
+    public void makeMove() {
+        Player p = players.get(nextPlayerIndex);
+        Cell c = p.makeMove(board);
+
+        Move m = new Move(c, p);
+        moves.add(m);
+
+        if(checkWinner(m, board)) {
+            gameStatus = GameStatus.SUCCESS;
+            winner = p;
+            return;
+        }
+
+        if(moves.size() == board.getDimension() * board.getDimension()) {
+            gameStatus = GameStatus.DRAW;
+            return;
+        }
+
+        nextPlayerIndex++;
+        nextPlayerIndex = nextPlayerIndex % players.size();
+    }
+
+    private boolean checkWinner(Move m, Board board) {
+        for(WinningStrategy w : winningStrategyList) {
+            if(w.checkWinner(m, board)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static class GameBuilder {
         private  List<Player> players;
         private int dimension;

@@ -30,8 +30,67 @@ public class TicTacToeApplication {
 
         GameController gameController = new GameController();
         Game game = gameController.startGame(dimension, players, winningStrategyList);
-        gameController.print(game);
+
+        while(GameStatus.INPROGRESS.equals(game.getGameStatus())) {
+            gameController.print(game);
+            gameController.makeMove(game);
+        }
+
+        if(GameStatus.SUCCESS.equals(game.getGameStatus())) {
+            System.out.println(game.getWinner().getName()+" has won the game");
+            game.print();
+        }
+
+        if(GameStatus.DRAW.equals(game.getGameStatus())) {
+            System.out.println("It is a draw..... ");
+        }
+
 
     }
-
 }
+
+
+/*      | - || - || - |
+        | - || - || - |
+        | - || - || - |
+Sandy, It's your turn to make the move. Enter the row and col
+        1 1
+        | - || - || - |
+        | - || # || - |
+        | - || - || - |
+Bot is making a move.... Wait!!!
+        | & || - || - |
+        | - || # || - |
+        | - || - || - |
+Sandy, It's your turn to make the move. Enter the row and col
+        0 1
+        | & || # || - |
+        | - || # || - |
+        | - || - || - |
+Bot is making a move.... Wait!!!
+        | & || # || & |
+        | - || # || - |
+        | - || - || - |
+Sandy, It's your turn to make the move. Enter the row and col
+        2 0
+        | & || # || & |
+        | - || # || - |
+        | # || - || - |
+Bot is making a move.... Wait!!!
+        | & || # || & |
+        | & || # || - |
+        | # || - || - |
+Sandy, It's your turn to make the move. Enter the row and col
+        2 1
+        | & || # || & |
+        | & || # || - |
+        | # || # || - |
+Bot is making a move.... Wait!!!
+        | & || # || & |
+        | & || # || & |
+        | # || # || - |
+Sandy, It's your turn to make the move. Enter the row and col
+        1 1
+Invalid move Sandy.  Enter row and col
+2 2
+It is a draw..... */

@@ -34,5 +34,9 @@ public class GameController {
         game.print();
     }
 
+    public void makeMove(Game game) {
+        game.makeMove();
+    }
+
 
 }

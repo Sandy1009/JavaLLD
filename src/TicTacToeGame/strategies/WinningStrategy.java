@@ -1,10 +1,10 @@
 package TicTacToeGame.strategies;
 
+import TicTacToeGame.models.Board;
 import TicTacToeGame.models.Move;
-import TicTacToeGame.models.Player;
 
 public interface WinningStrategy {
 
-    boolean checkWinner(Move move, Player player);
+    boolean checkWinner(Move move, Board board);
 
 }
