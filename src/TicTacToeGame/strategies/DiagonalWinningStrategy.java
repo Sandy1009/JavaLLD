@@ -1,6 +1,7 @@
 package TicTacToeGame.strategies;
 
 import TicTacToeGame.models.Board;
+import TicTacToeGame.models.Cell;
 import TicTacToeGame.models.Move;
 
 import java.util.HashMap;
@@ -40,5 +41,21 @@ public class DiagonalWinningStrategy implements WinningStrategy {
         }
 
         return false;
+    }
+
+    @Override
+    public void handleUndo(Move lastMove, Board board) {
+        Cell cell = lastMove.getCell();
+        int row = cell.getRow();
+        int col = cell.getCol();
+        char symbol = cell.getPlayer().getSymbol();
+
+        if(row == col) {
+            leftDiagonal.put(symbol, leftDiagonal.get(symbol)-1);
+        }
+
+        if(row+col == board.getDimension()-1) {
+            rightDiagonal.put(symbol, rightDiagonal.get(symbol)-1);
+        }
     }
 }

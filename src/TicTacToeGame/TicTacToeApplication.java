@@ -12,6 +12,7 @@ import TicTacToeGame.strategies.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TicTacToeApplication {
 
@@ -19,6 +20,7 @@ public class TicTacToeApplication {
 
         int dimension = 3;
         List<Player> players = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
         players.add(new Player(1, "Sandy", PlayerType.HUMAN, '#'));
         players.add(new Bot(2, "GPT", PlayerType.BOT, '&', BotDifficultyLevel.EASY));
@@ -33,6 +35,15 @@ public class TicTacToeApplication {
 
         while(GameStatus.INPROGRESS.equals(game.getGameStatus())) {
             gameController.print(game);
+
+            System.out.println("Do you want to undo the previous move ? (y/n)");
+            String s = sc.next();
+
+            if("y".equalsIgnoreCase(s)) {
+                gameController.undo(game);
+                continue;
+            }
+
             gameController.makeMove(game);
         }
 

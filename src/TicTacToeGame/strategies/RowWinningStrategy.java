@@ -1,6 +1,7 @@
 package TicTacToeGame.strategies;
 
 import TicTacToeGame.models.Board;
+import TicTacToeGame.models.Cell;
 import TicTacToeGame.models.Move;
 
 import java.util.HashMap;
@@ -33,5 +34,15 @@ public class RowWinningStrategy implements WinningStrategy {
         }
 
         return false;
+    }
+
+    @Override
+    public void handleUndo(Move lastMove, Board board) {
+        Cell cell = lastMove.getCell();
+        int row = cell.getRow();
+        char symbol = cell.getPlayer().getSymbol();;
+
+        Map<Character, Integer> rowsMap = countsMap.get(row);
+        rowsMap.put(symbol, rowsMap.get(symbol)-1);
     }
 }

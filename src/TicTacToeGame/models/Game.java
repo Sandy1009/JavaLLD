@@ -68,6 +68,30 @@ public class Game {
         return false;
     }
 
+    public void undo() {
+
+        if(moves.size() == 0) {
+            System.out.println("No moves to undo.... ");
+            return;
+        }
+
+        Move lastMove = moves.removeLast();
+
+        Cell cell = lastMove.getCell();
+        cell.setPlayer(null);
+        cell.setCellState(CellState.EMPTY);
+
+        if(nextPlayerIndex == 0) {
+            nextPlayerIndex = players.size()-1;
+        } else {
+            nextPlayerIndex--;
+        }
+
+        for(WinningStrategy w : winningStrategyList) {
+            w.handleUndo(lastMove, board);
+        }
+    }
+
     public static class GameBuilder {
         private  List<Player> players;
         private int dimension;
