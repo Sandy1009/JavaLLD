@@ -8,4 +8,9 @@ public class Vehicle {
     private String owner;
     private VehicleType vehicleType;
 
+    public Vehicle(String number, String owner, VehicleType vehicleType) {
+        this.number = number;
+        this.owner = owner;
+        this.vehicleType = vehicleType;
+    }
 }

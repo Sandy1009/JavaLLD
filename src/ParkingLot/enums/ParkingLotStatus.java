@@ -2,6 +2,6 @@ package ParkingLot.enums;
 
 public enum ParkingLotStatus {
 
-    OCCUPIED, EMPTY
+    ACTIVE, IN_ACTIVE, BLOCKED
 
 }
